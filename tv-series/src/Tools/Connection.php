@@ -1,26 +1,29 @@
 <?php
 namespace TvSeries\Tools;
 
-class Connection {
+use \PDO;
+use \PDOException;
+class Connection{
 
-    private static $instance = null;
-
-    private function __construct() {
-        try {
-            $host = $_ENV['DB_HOST'];
-            $database = $_ENV['DB_DATABASE'];
-            $this->instance = new \PDO("mysql:host=$host;dbname=$database", $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
-            $this->instance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        } catch (\Throwable $th) {
-            echo 'Error: ' . $th->getMessage();
-        }
-    }
-
+    static private $instance;
+    
     public static function getConnection() {
-        if(self::$instance === null) {
-            self::$instance = new Connection();
+        if (self::$instance) {
+            return self::$instance;
         }
+
+        $host = $_ENV['DB_HOST'];
+        $port = $_ENV['DB_PORT'];
+        $database = $_ENV['DB_DATABASE'];
+
+        $dns = "mysql:host=$host;port=$port;dbname=$database";
+        self::$instance = new PDO($dns, $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD']);
 
         return self::$instance;
+    }
+
+    public static function __callStatic ($name, $args) {
+        $callback = array (self::getConnection(), $name);
+        return call_user_func_array($callback, $args);
     }
 }
