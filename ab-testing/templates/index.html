@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ design.name }}</title>
+        <style>
+            .component{
+                border: 1px solid #ccc;
+                padding: 15px;
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>{{ design.name }}</h1>
+
+        {% for component in design.components %}
+            <div class="component" style="max-width: {{ component.size }}%;">{{ component.component }}</div>
+        {% endfor %}
+
+    </body>
+</html>
