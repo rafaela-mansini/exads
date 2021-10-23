@@ -1,0 +1,18 @@
+{
+    "name": "rafaela/ab-testing",
+    "autoload": {
+        "psr-4": {
+            "AbTesting\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rafaela Mansini",
+            "email": "rafaela_mansini@hotmail.com"
+        }
+    ],
+    "require": {
+        "exads/ab-test-data": "^1.0",
+        "twig/twig": "^3.0"
+    }
+}
