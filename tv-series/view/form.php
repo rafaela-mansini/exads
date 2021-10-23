@@ -13,10 +13,11 @@
                 Our next TV Show will be: <b><span id="tv-serie">...</span></b>
               </div>
             <hr />
-            <p>Searching for a specific date? Insert below to search:</p>
+            <p>Searching for a specific title or date? Insert below to search:</p>
                 <div class="row justify-content-md-center">
-                    <div class="col col-md-3 col-xs-12">
+                    <div class="col col-md-6 col-xs-12">
                         <form method="POST" action="#" id="searchForm">
+                            <input type="text" id="title" placeholder="Insert the title here" class="form-control mb-3" />
                             <input type="datetime-local" id="dateTime" class="form-control mb-3" />
                             <input type="button" id="submitSearch" class="form-control btn btn-outline-dark" value="Search" />
                         </form>
@@ -33,7 +34,7 @@
                 dataType: 'json'
             })
             .done((data) => {
-                $("#tv-serie").html(data.title);
+                $("#tv-serie").html(`${data.title}: ${data.week_day} at ${data.show_time}`);
             });
         });
 
@@ -43,46 +44,14 @@
                 dataType: 'json',
                 method: 'POST',
                 data: {
-                    dateTime: $("#dateTime").val()
+                    dateTime: $("#dateTime").val(),
+                    title: $("#title").val()
                 }
             })
             .done((data) => {
-                $("#tv-serie").html(data.title);
+                $("#tv-serie").html(`${data.title}: ${data.week_day} at ${data.show_time}`);
             });
             return false;
         });
-        
-        // $("#searchForm").submit(() => { 
-            // $.ajax({
-            //     url: apiURL,
-            //     dataType: 'json',
-            //     method: POST,
-            //     data: {
-            //         dateTime: $("#dateTime").value()
-            //     }
-            // })
-            // .done((data) => {
-            //     $("#tv-serie").html(data.title);
-            // });
-            // return false;
-        //  });
-
-
-        //  $("#searchForm").on("submit", function (e) {
-        //     e.preventDefault();
-        //     $.ajax({
-        //         url: apiURL,
-        //         dataType: 'json',
-        //         method: POST,
-        //         data: {
-        //             dateTime: $("#dateTime").value()
-        //         }
-        //     })
-        //     .done((data) => {
-        //         $("#tv-serie").html(data.title);
-        //     });
-
-        //     return false;
-        // });
     </script>
 </html>

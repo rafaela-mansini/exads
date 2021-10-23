@@ -11,6 +11,9 @@ class SeriesController {
             $dateTime = new \DateTime($_POST['dateTime']);
             $serie->setDateTime($dateTime);
         }
+        if (isset($_POST['title'])) {
+            $serie->setTitle($_POST['title']);
+        }
         $nextShows = $serie->nextShows($dateTime);
         return json_encode($nextShows);
     }
