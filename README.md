@@ -24,6 +24,8 @@ Those were the technologies used:
 
 ### 3. TV Series
  - Script to tell when the next TV Series will air based on the current time-date or an inputted time-date, and that can be optionally filtered by TV Series title.
+ - Before run this project, you need make a dump with database informations. The file from dump it's in folder `tv-series/db/dump.sql`. 
+ - Will be necessary too rename the file `.env~example` to `.env` and inside this file, insert your database configuration.
  - To run this project: use the integrated PHP and run this command inside the main folder: `php -S your localhost:8880 -t tv-series`.
  - To see this project running, you can use some Json viwer program (like postman or insomnia), or you can run a simple HTML template.
     - Requests/json: 
